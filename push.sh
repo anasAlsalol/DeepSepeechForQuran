@@ -1,11 +1,11 @@
 git add . 
-git commit -m "test"
-git push origin quran
+git commit -m "run job"
+git push origin job
 paperspace jobs create \
 --container "paperspace/tensorflow:1.5.0-gpu" \
 --machineType "G1" \
---command "bash test_run.sh" \
---workspace "https://github.com/anasAlsalol/DeepSpeech" \
---workspaceRef "quran" \
+--command "bash setup_env.sh" \
+--workspace "https://github.com/anasAlsalol/DeepSepeechForQuran.git" \
+--workspaceRef "job" \
 --isPreemptible true \
 --project "DeepSpeech Model"
