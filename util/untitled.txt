@@ -1,0 +1,34 @@
+#quran_tusers
+#quran
+$amount_thr = @{
+    '100p' = 9999999
+    '70p'  = 799000
+    '50p'  = 560000
+    '30p'  = 260000
+    '5sec' = 16000
+}
+
+$amount_thr.Keys | ForEach-Object {
+    $filename = -join ($_, '.txt')
+    $tempfilename = -join ($_, '.tmp')
+    $wav_filesize = $amount_thr.Item($_)
+    Import-CSV "/notebooks/quran_data/quran_tusers/csv/quran_all.csv" |  Where-Object { $_.wav_filesize -lt $wav_filesize } | Select-Object wav_filename  | Out-File -FilePath $tempfilename
+    cat $tempfilename | ForEach-Object { $_.replace("data/", "/notebooks/quran_data/") } | out-file $filename
+    rm $tempfilename
+}
+
+#quran_tusers
+#quran
+
+cat  5sec.txt | zip -@ 5sec_quran_tusers.zip
+compare-object (get-content 30p.txt) (get-content ./5sec.txt) | Select-Object InputObject  | zip -@ 30p_quran_tusers.zip
+compare-object (get-content 50p.txt) (get-content ./30p.txt) | Select-Object InputObject  | zip -@ 50p_quran_tusers.zip
+compare-object (get-content 70p.txt) (get-content ./50p.txt) | Select-Object InputObject  | zip -@ 70p_quran_tusers.zip
+compare-object (get-content 100p.txt) (get-content ./70p.txt) | Select-Object InputObject  | zip -@ 100p_quran_tusers.zip
+
+
+ls *.zip | ForEach-Object { aws s3 ls  s3://deepspeechdata/ }
+
+ls *.zip | ForEach-Object { rename-item $_ "quran- $_" }
+
+# ls *.csv | % {aws s3 cp $_  s3://s3://anassalooqurandata// }
