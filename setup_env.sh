@@ -29,5 +29,5 @@ python3 setup.py install
 
 ## train Model ## 
 
-#bash ./bin/run-quran.sh > /artifacts/train_log.txt
-bash ./bin/run-quran.sh > train_log.txt
+bash ./bin/run-quran.sh > /artifacts/train_log.txt
+#bash ./bin/run-quran.sh > train_log.txt

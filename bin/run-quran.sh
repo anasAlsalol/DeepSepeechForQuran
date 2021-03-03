@@ -29,8 +29,8 @@ do
     --test_batch_size 36 --train_batch_size 24 --dev_batch_size 36 \
     --export_language "ar" --export_license "Apache-2.0" --export_model_name "DeepSpeech Quran" \
     --export_author_id "Anas Alsalool" \
-    --epochs 75 --learning_rate $i --dropout_rate 0.25 --export_dir "${COMPUTE_DATA_DIR}"/${i} -v 1 \
-    --checkpoint_dir "${COMPUTE_DATA_DIR}"/checkpoints/${i} --summary_dir "${COMPUTE_DATA_DIR}"/summaries/${i} \
+    --epochs 75 --learning_rate $i --dropout_rate 0.25 --export_dir "${JOB_DATA_DIR}"/${i} -v 1 \
+    --checkpoint_dir "${JOB_DATA_DIR}"/checkpoints/${i} --summary_dir "${JOB_DATA_DIR}"/summaries/${i} \
      --use_allow_growth "true"  --automatic_mixed_precision "true"
 done
  "$@"
