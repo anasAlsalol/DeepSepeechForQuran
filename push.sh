@@ -3,7 +3,7 @@ git commit -m "run job"
 git push origin job
 paperspace jobs create \
 --container "paperspace/tensorflow:1.5.0-gpu" \
---machineType "G1" \
+--machineType "K8" \
 --command "bash setup_env.sh" \
 --workspace "https://github.com/anasAlsalol/DeepSepeechForQuran.git" \
 --workspaceRef "job" \
